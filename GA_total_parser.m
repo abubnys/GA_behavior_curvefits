@@ -1,26 +1,29 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                       parser for GA assay data
 %
-% this script takes the data from Nadera's new template scripts (circa
-% 8/23/17) and extracts and organizes it into a structure
+%   This script takes the behavioral data from an excel file
+%   and extracts and organizes it into a structure that organizes the data
+%   by cage, week, and day
 %
-% 
+%   A data point was collected once every minute over 24 hours for several
+%   weeks per experiment. So a single day's worth of data consists of 1440
+%   measurements for each animal
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear
-week_lst = 1:8; % weeks 1 to 6
-cage_lst = 3:10; % cages 1 to 8
-fnom = 'ND_round2_HACTV.xlsx';
-fpath = '/Users/abubnys/Desktop/ND_GA_assay/';
+week_lst = 1:3; % weeks 1 to 6
+cage_lst = 3:6; % cages 1 to 4
+fnom = 'raw_data.xlsx';
+fpath = '';
 
 mouse_activity = struct;
 
-for wk = 1:8
+for wk = 1:week_lst(end)
     counter = 1;
-    for cg = 3:10
+    for cg = cage_lst(1):cage_lst(end)
         mouse_activity(counter).cage(wk).week = GA_parser_by_day(cg,wk,fnom,fpath);
         counter = counter+1;
-        %sprintf('cage %0.0f',cg)
     end
-    sprintf('week %0.0f',wk)
+    sprintf('currently loading week %0.0f',wk)
 end
