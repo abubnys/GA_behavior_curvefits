@@ -12,5 +12,13 @@ The function `wake_times_function` takes the full data set for a single cage and
 
 The function `window_picker` takes the transition points identified by `wake_times_function` and identifies the window over which to fit the data to a logistic curve. If `LD = 1`, the function finds the sleep-wake transitions and sets the window as the last local minimum before the transition to the first local maximum after the transition. If `LD = 2`, the function finds the wake-sleep transitions and sets the window as the last local maximum before the transition to the first local minimum after the transition. It then feeds these intervals in the data into the function `log_fit` for curve fitting.
 
-The function `log_fit` takes the behavioral transition curve and fits it to a logistic equation.
+The function `log_fit` takes the behavioral transition curve and fits it to a logistic equation with the 3 parameters x, k, and L:
+
+![log eqn](/readme_screenshots/logistic_eqn.png)
+
+The goodness of fit is evaluated by minimizing the root mean squared error (rmse) between the raw data (blue squares) and the curve (red line):
+
+![curve fit](/readme_screenshots/log_fit.png)
+
+The parameters from the best fit are saved to the output structure `curve_fits`, along with the rmse, the raw data that was fit, and the curve that best approximates it. This structure should be saved for later analysis.
 
