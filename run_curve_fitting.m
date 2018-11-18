@@ -33,8 +33,8 @@
 LD = 1;
 
 % location of the input structure
-fpath = '/users/abubnys/Desktop/ND_GA_assay/';
-fnom = 'ND_round2_HACTV.mat';
+fpath = '';
+fnom = 'parsed_data.mat';
 load([fpath fnom]);
 
 curve_fits = struct;
